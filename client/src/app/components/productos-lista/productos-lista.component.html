@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let producto of productos">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                {{producto.nombre}}
+                <button class="btn btn-danger" (click)="borrarProducto(producto.id)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+            <img class="card-img-top" src="{{producto.imagen}}" alt="Card image cap">
+            <div class="card-body">
+                <p>{{producto.descripcion}}</p>
+                <a [routerLink]="['/productos/edit', producto.id]" class="btn btn-info btn-block">
+                    EDITAR
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
