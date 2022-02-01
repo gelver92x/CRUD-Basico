@@ -1,19 +1,46 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authcontroller = void 0;
+exports.ingresarcontroller = void 0;
 const database_1 = __importDefault(require("../database"));
-class authController {
-    registrar(req, res) {
-        const { username, password } = req.body;
-        database_1.default.query('select username,password from user where username=? and pass=?', [username, password]);
-        console.log(username);
-    }
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+class ingresarController {
     ingresar(req, res) {
-        const { username, password } = req.body;
-        database_1.default.query('select username,password from user where username=? and pass=?', [username, password]);
+        return __awaiter(this, void 0, void 0, function* () {
+            //se obtienen los valores desde el body
+            const { username, password } = req.body;
+            //se valida que el usuario exista en la base de datos
+            const usuario = yield database_1.default.query('SELECT id, username, password FROM usuarios WHERE username=? and password=?', [username, password]);
+            //si existe se guarda como token
+            if (usuario.length > 0) {
+                let data = JSON.stringify(usuario[0].id);
+                const token = jsonwebtoken_1.default.sign(data, 'secretkey');
+                res.json({ token });
+                console.log(token);
+            }
+            else {
+                res.status(404).json({ text: "Usuario o clave incorrecta" });
+            }
+        });
+    }
+    registrar(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { username, password, fullname } = req.body;
+            const usuario = yield database_1.default.query('INSERT INTO usuarios (username, password, fullname) VALUES (?, ?, ?)', [username, password, fullname]);
+            jsonwebtoken_1.default.sign({}, "", {});
+            res.json('SignUp');
+        });
     }
 }
-exports.authcontroller = new authController();
+exports.ingresarcontroller = new ingresarController();

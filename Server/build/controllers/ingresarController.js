@@ -20,7 +20,7 @@ class ingresarController {
         return __awaiter(this, void 0, void 0, function* () {
             const { username, password } = req.body;
             const usuario = yield database_1.default.query('SELECT username, password FROM usuarios WHERE username=? and password=?', [username, password]);
-            console.log(req.body);
+            //console.log(req.body);
             if (usuario.length > 0) {
                 let data = JSON.stringify(usuario[0]);
                 const token = jsonwebtoken_1.default.sign(data, 'secretkey');

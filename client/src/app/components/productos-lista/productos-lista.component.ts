@@ -32,7 +32,7 @@ export class ProductosListaComponent implements OnInit {
   borrarProducto(id: string){
     this.productosservice.eliminar(id).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.getProductos();
       },
       err => console.error(err)

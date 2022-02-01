@@ -14,20 +14,24 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router
-    ) { }
+  ) { }
 
 
   sigin(user: usuario) {
-    return this.http.post(`${this.API_URI}/ingresar`, user)
+    return this.http.post(`${this.API_URI}/signIn`, user)
   }
 
-  loggedIn():boolean {
+  loggedIn(): boolean {
+    //si localStorage tiene un token retorna 'true'
     return !!localStorage.getItem('token');
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
 
+  getToken() {
+    return localStorage.getItem('token')
+  }
 }

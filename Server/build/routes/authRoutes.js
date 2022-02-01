@@ -2,15 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const authController_1 = require("../controllers/authController");
-class authRoutes {
+class ingresarRoutes {
     constructor() {
         this.router = (0, express_1.Router)();
         this.config();
     }
     config() {
-        this.router.post('/', authController_1.authcontroller.ingresar);
-        this.router.post('/', authController_1.authcontroller.registrar);
+        this.router.post('/signIn', authController_1.ingresarcontroller.ingresar);
+        this.router.post('/signUp', authController_1.ingresarcontroller.registrar);
     }
 }
-const authroutes = new authRoutes();
-exports.default = authroutes.router;
+const ingresarroutes = new ingresarRoutes();
+exports.default = ingresarroutes.router;

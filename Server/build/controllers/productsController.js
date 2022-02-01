@@ -25,7 +25,7 @@ class ProductsController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const producto = yield database_1.default.query('SELECT * FROM productos WHERE id = ?', [id]);
-            console.log(producto);
+            //console.log(producto);
             if (producto.length > 0) {
                 return res.json(producto[0]);
             }
@@ -51,7 +51,7 @@ class ProductsController {
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const oldProduct = req.body;
+            //const oldProduct = req.body;
             yield database_1.default.query('UPDATE productos set ? WHERE id = ?', [req.body, id]);
             res.json({ message: "El producto fue actualizado" });
         });

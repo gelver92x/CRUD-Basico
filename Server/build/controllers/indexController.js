@@ -4,7 +4,7 @@ exports.indexController = void 0;
 class IndexController {
     index(req, res) {
         res.json({
-            text: "Hola que tdal?"
+            text: "Index funcionando"
         });
     }
 }

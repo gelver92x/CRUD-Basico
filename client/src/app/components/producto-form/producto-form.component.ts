@@ -33,7 +33,7 @@ export class ProductoFormComponent implements OnInit {
       this.productosService.getProducto(params.id)
       .subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           this.Producto = res;
           this.edit = true;
         }
@@ -48,7 +48,7 @@ export class ProductoFormComponent implements OnInit {
     this.productosService.guardar(this.Producto)
       .subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           this.router.navigate(['/productos']);
         },
         err => console.error(err)
@@ -59,7 +59,7 @@ export class ProductoFormComponent implements OnInit {
     this.productosService.actualizar(this.Producto.id!, this.Producto)
     .subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.router.navigate(['/productos']);
       },
       err => console.log(err)
