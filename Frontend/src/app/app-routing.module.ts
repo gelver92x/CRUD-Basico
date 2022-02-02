@@ -27,7 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'productos/edit/:id',
-    component: ProductoFormComponent
+    component: ProductoFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',

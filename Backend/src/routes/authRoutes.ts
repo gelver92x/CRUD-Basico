@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ingresarcontroller } from '../controllers/authController';
-import { verifyToken, verifyToken2 } from '../midlewares/authjwt'
+
 
 
 

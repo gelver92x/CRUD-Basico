@@ -21,8 +21,10 @@
                     <div class="form-group">
                         <input type="url" name="imagen" [(ngModel)]= "Producto.imagen" placeholder="Imagen" class="form-control" />
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-success"(click)= "edit == true ? actualizarProducto() : guardarNuevoProducto()">GUARDAR</button>
+                    <div class="d-grid gap-2 align-items-center">
+                         <!-- si la variable edit es true, entonces actualizar producto, si no guarda un nuevo producto -->
+                        <button class="btn btn-success"(click)= "edit ? actualizarProducto() : guardarProducto()">GUARDAR</button>
+                        <a class="btn btn-danger" routerLink="/productos" role="button">CANCELAR</a>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,5 @@
 <div class="container p-8">
-  <app-navigation></app-navigation>
+  <app-navigation *ngIf="authService.loggedIn()"></app-navigation>
 </div>
 
 <div class="container p-8">

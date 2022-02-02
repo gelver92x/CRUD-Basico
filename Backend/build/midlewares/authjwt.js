@@ -37,16 +37,18 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
 exports.verifyToken = verifyToken;
 //funcion para verificar el token
 const verifyToken2 = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!req.headers.authorization)
-        return res.status(401).json('No autorizado');
-    const token = req.headers.authorization.substr(7);
-    if (token !== '') {
-        const content = jsonwebtoken_1.default.verify(token, 'secretkey');
-        req = content;
-        next();
+    try {
+        if (!req.headers.authorization)
+            return res.status(401).json('No autorizado');
+        const token = req.headers.authorization.substr(7);
+        if (token !== '') {
+            const content = jsonwebtoken_1.default.verify(token, 'secretkey');
+            req = content;
+            next();
+        }
     }
-    else {
-        res.status(401).json('Token vacio');
+    catch (error) {
+        return res.status(401).json({ message: 'Token vacio' });
     }
 });
 exports.verifyToken2 = verifyToken2;

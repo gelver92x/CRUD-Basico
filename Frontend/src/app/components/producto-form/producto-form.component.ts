@@ -23,25 +23,29 @@ export class ProductoFormComponent implements OnInit {
     imagen: ""
   };
 
+  //si el edit esta en falso, guarda
   edit: boolean = false;
   
   constructor(private productosService: ProductosService, private router: Router, private activatedroute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    //en activatedroute.snapshot.params estan los parametros del producto
     const params = this.activatedroute.snapshot.params;
+    //Se valida que el producto exista
     if (params.id){
       this.productosService.getProducto(params.id)
       .subscribe(
         res => {
           //console.log(res);
           this.Producto = res;
+          //se cambia el valor de edit a true para saber que se esta editando
           this.edit = true;
         }
       )
     }
   }
 
-  guardarNuevoProducto() {
+  guardarProducto() {
     delete this.Producto.id;
     //delete this.Producto.user_id;
 
@@ -50,8 +54,7 @@ export class ProductoFormComponent implements OnInit {
         res => {
           //console.log(res);
           this.router.navigate(['/productos']);
-        },
-        err => console.error(err)
+        }
       )
   }
 
@@ -61,8 +64,7 @@ export class ProductoFormComponent implements OnInit {
       res => {
         //console.log(res);
         this.router.navigate(['/productos']);
-      },
-      err => console.log(err)
+      }
     )
 
   }
